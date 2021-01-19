@@ -18,22 +18,11 @@ db = SQLAlchemy(app)
 # Flask RESTful init
 api = Api(app)
 
-# Home route redirect to /user
-@app.route('/', methods=['GET'])
-def home_redirect():
-    return redirect('http://127.0.0.1/user')
-
-# @app.before_request
-# def db_setup() -> None:
-    # from models.user_model import db
-    # # Create User Table
-    # db.create_all()
-
 
 if __name__ == '__main__':
     # Bind resources
     from resources.user_resource import UserResrouce
-    api.add_resource(UserResrouce, '/user')
+    api.add_resource(UserResrouce, '/user/<string:service>')
 
     # Create User Table
     from models.user_model import db
