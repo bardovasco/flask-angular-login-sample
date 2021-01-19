@@ -35,12 +35,15 @@ class ResourceQueryService(DBService):
         self.resource = resource
 
     def create_one(self, data) -> None:
+        result = None
         try:
             self.db_session.add(data)
             self.db_session.commit()
         except (DBAPIError,IntegrityError,InterfaceError) as e:
-            print('database error', e)
+            result = str(e.orig)
             self.db_session.rollback()
+        finally:
+            return result
 
     def get_by_email(self, filter_detail) -> 'User':
         """
