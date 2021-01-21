@@ -1,2 +1,60 @@
-<p>sign-up works!</p>
+<section class="section">
+  <div class="columns is-centered is-mobile mt-5">
+    <form class="box is-medium m-6 p-6"
+      focusInvalidInput
+      #thisForm="ngForm"
+      [formGroup]="userForm"
+      (ngSubmit)="onSubmit()">
+      <!-- Title -->
+      <h1 class="subtitle is-2 has-text-centered">
+        Sign Up
+      </h1>
+      <!-- Username field -->
+      <div class="field">
+        <label class="label">Username</label>
+        <div class="control">
+          <input class="input"
+            type="text"
+            [(ngModel)]=userData.username
+            formControlName="username"
+            placeholder="usernameExample69">
+        </div>
+      </div>
+      <!-- Email field -->
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+          <input class="input"
+            type="email"
+            [(ngModel)]=userData.email
+            formControlName="email"
+            placeholder="exampleEmail@mail.com">
+        </div>
+      </div>
+      <!-- Passphrase field -->
+      <div class="field">
+        <label class="label">Passphrase</label>
+        <div class="control">
+          <input class="input"
+          type="password"
+            [(ngModel)]=userData.passPhrase
+          formControlName="passPhrase">
+        </div>
+      </div>
+        <!-- Login service buttons -->
+        <!-- Sign Up button -->
+        <div class="columns is-centered">
+          <div class="buttons">
+            <button
+              class="button is-link is-rounded is-success m-5"
+              type="submit">
+                Submit
+            </button>
+            <!-- Sign In redirect -->
+            <a routerLink="/login/signIn" class="button is-rounded is-info is-link m-3">Sign In</a>
+          </div>
+        </div>
+    </form>
+  </div>
+</section>
 <router-outlet></router-outlet>
