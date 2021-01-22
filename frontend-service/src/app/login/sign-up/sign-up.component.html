@@ -2,45 +2,48 @@
   <div class="columns is-centered is-mobile mt-5">
     <form class="box is-medium m-6 p-6"
       focusInvalidInput
-      #thisForm="ngForm"
-      [formGroup]="userForm"
-      (ngSubmit)="onSubmit()">
+      #userFormData="ngForm"
+      (ngSubmit)="onSubmit(userFormData.value)">
       <!-- Title -->
       <h1 class="subtitle is-2 has-text-centered">
         Sign Up
       </h1>
+
       <!-- Username field -->
       <div class="field">
         <label class="label">Username</label>
         <div class="control">
           <input class="input"
+            name="username"
             type="text"
-            [(ngModel)]=userData.username
-            formControlName="username"
-            placeholder="usernameExample69">
+            placeholder="usernameExample69"
+            ngModel required>
         </div>
       </div>
+
       <!-- Email field -->
       <div class="field">
         <label class="label">Email</label>
         <div class="control">
           <input class="input"
+            name="email"
             type="email"
-            [(ngModel)]=userData.email
-            formControlName="email"
-            placeholder="exampleEmail@mail.com">
+            placeholder="exampleEmail@mail.com"
+            ngModel required>
         </div>
       </div>
+
       <!-- Passphrase field -->
       <div class="field">
         <label class="label">Passphrase</label>
         <div class="control">
-          <input class="input"
+        <input class="input"
+          name="passPhrase"
           type="password"
-            [(ngModel)]=userData.passPhrase
-          formControlName="passPhrase">
+          ngModel required>
         </div>
       </div>
+
         <!-- Login service buttons -->
         <!-- Sign Up button -->
         <div class="columns is-centered">
@@ -50,8 +53,10 @@
               type="submit">
                 Submit
             </button>
+
             <!-- Sign In redirect -->
             <a routerLink="/login/signIn" class="button is-rounded is-info is-link m-3">Sign In</a>
+
           </div>
         </div>
     </form>
