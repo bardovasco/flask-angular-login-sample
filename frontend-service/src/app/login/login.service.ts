@@ -2,13 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import { User } from './user';
 
-export class User {
-  id?: number;
-  username: string;
-  email: string;
-  passPhrase: string;
-}
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +22,7 @@ export class LoginService {
     })
   }
 
-  addUser(userData): Observable<User> {
+  addUser(userData: User): Observable<User> {
     return this.httpClient.post<User>(
       this.userApi,
       JSON.stringify(userData),
