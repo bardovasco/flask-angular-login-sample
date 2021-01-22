@@ -1,7 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Md5 } from 'ts-md5/dist/md5';
 
-import { LoginService, User } from '../login.service';
+import { LoginService } from '../login.service';
+import { User } from '../user';
+
 
 @Component({
   selector: 'app-sign-up',
@@ -19,7 +23,8 @@ export class SignUpComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private router: Router,
   ) {
     this.userForm = this.formBuilder.group({
       username: ['', [Validators.required]],
@@ -31,8 +36,12 @@ export class SignUpComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit() {
-    return this.loginService.addUser(this.userData)
+  onSubmit(userData: User) {
+    // Encrypt password
+    userData.passPhrase = Md5.hashStr(userData.passPhrase);
+
+    // POST Http Request
+    return this.loginService.addUser(userData)
       .subscribe(res => console.log(res))
   }
 }
