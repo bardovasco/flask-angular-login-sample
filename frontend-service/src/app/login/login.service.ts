@@ -24,7 +24,18 @@ export class LoginService {
 
   addUser(userData: User): Observable<User> {
     return this.httpClient.post<User>(
-      this.userApi,
+      `${this.userApi}/signUp`,
+      JSON.stringify(userData),
+      this.httpHeaders
+    ).pipe(
+      retry(1),
+      catchError(this.processError)
+    )
+  }
+
+  getOne(userData: User): Observable<User> {
+    return this.httpClient.post<User>(
+      `${this.userApi}/signIn`,
       JSON.stringify(userData),
       this.httpHeaders
     ).pipe(
