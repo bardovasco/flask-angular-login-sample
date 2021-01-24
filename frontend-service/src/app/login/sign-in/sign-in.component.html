@@ -1,2 +1,54 @@
-<p>sign-in works!</p>
+<section class="section">
+  <div class="columns is-centered is-mobile mt-5">
+    <form class="box is-medium m-6 p-6"
+      focusInvalidInput
+      #userFormData="ngForm"
+      (ngSubmit)="onSubmit(userFormData.value)">
+
+      <!-- Title -->
+      <h1 class="subtitle is-2 has-text-centered">
+        Sign In
+      </h1>
+
+      <!-- Email field -->
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+          <input class="input"
+            name="email"
+            type="text"
+            placeholder="youremail@mail.com"
+            ngModel required>
+        </div>
+      </div>
+
+      <!-- Password field -->
+      <div class="field">
+        <label class="label">Passphrase</label>
+        <div class="control">
+        <input class="input"
+          name="passPhrase"
+          type="password"
+          ngModel required>
+        </div>
+      </div>
+
+      <!-- Login service button -->
+      <div class="columns is-left">
+        <div class="buttons">
+          <!-- Sign In button -->
+          <button
+            class="button is-link is-success m-5">
+              Sign In
+          </button>
+          <!-- Sign Up instead -->
+          <a routerLink="/login/signUp"
+            class="content is-italic">
+            <sub>Create account instead.</sub>
+          </a>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
 <router-outlet></router-outlet>
