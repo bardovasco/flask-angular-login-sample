@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Md5 } from 'ts-md5/dist/md5';
 
 import { LoginService } from '../login.service';
-import { User } from '../user';
 
 
 @Component({
@@ -14,12 +13,6 @@ import { User } from '../user';
 })
 export class SignUpComponent implements OnInit {
   userForm: FormGroup;
-
-  @Input() userData: User = {
-    username: '',
-    email: '',
-    passPhrase: ''
-  }
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,12 +29,12 @@ export class SignUpComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(userData: User) {
+  onSubmit(userData) {
     // Encrypt password
     userData.passPhrase = Md5.hashStr(userData.passPhrase);
-
+    console.log(userData);
     // POST Http Request
-    return this.loginService.addUser(userData)
-      .subscribe(res => console.log(res))
+    //return this.loginService.addUser(userData)
+      //.subscribe(res => console.log(res))
   }
 }
