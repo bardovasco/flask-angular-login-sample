@@ -1,9 +1,8 @@
 <section class="section">
   <div class="columns is-centered is-mobile mt-5">
     <form class="box is-medium m-6 p-6"
-      focusInvalidInput
-      #userFormData="ngForm"
-      (ngSubmit)="onSubmit(userFormData.value)">
+      [formGroup]="userForm"
+      (ngSubmit)="onSubmit()">
       <!-- Title -->
       <h1 class="subtitle is-2 has-text-centered">
         Sign Up
@@ -14,10 +13,9 @@
         <label class="label">Username</label>
         <div class="control">
           <input class="input"
-            name="username"
             type="text"
             placeholder="usernameExample69"
-            ngModel required>
+            formControlName="username">
         </div>
       </div>
 
@@ -26,10 +24,9 @@
         <label class="label">Email</label>
         <div class="control">
           <input class="input"
-            name="email"
             type="email"
             placeholder="exampleEmail@mail.com"
-            ngModel required>
+            formControlName="email">
         </div>
       </div>
 
@@ -38,9 +35,8 @@
         <label class="label">Passphrase</label>
         <div class="control">
         <input class="input"
-          name="passPhrase"
           type="password"
-          ngModel required>
+          formControlName="passPhrase">
         </div>
       </div>
 
@@ -49,6 +45,7 @@
         <div class="columns is-left">
           <div class="buttons">
             <button
+              [disabled]="userForm.invalid"
               class="button is-link is-success m-5"
               type="submit">
                 Submit

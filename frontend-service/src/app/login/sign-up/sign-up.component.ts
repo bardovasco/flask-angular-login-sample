@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Md5 } from 'ts-md5/dist/md5';
 
 import { LoginService } from '../login.service';
+import { User } from '../user';
 
 
 @Component({
@@ -12,6 +12,7 @@ import { LoginService } from '../login.service';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
+  @Output() userData = new EventEmitter();
   userForm: FormGroup;
 
   constructor(
@@ -29,12 +30,17 @@ export class SignUpComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(userData) {
-    // Encrypt password
-    userData.passPhrase = Md5.hashStr(userData.passPhrase);
-    console.log(userData);
+  onSubmit() {
     // POST Http Request
-    //return this.loginService.addUser(userData)
-      //.subscribe(res => console.log(res))
+    return this.loginService.addUser(this.userForm.value)
+      .subscribe(res => {
+        // emit event
+        this.userData.emit({
+          email: this.userForm.get('email').value,
+          passPhrase: this.userForm.get('passPhrase').value
+        })
+        // Redirect to User profile
+        this.router.navigateByUrl('/user')
+      })
   }
 }
