@@ -37,7 +37,7 @@ class UserResrouce(Resource):
         if not result_data:
             return {}, 201
         else:
-            return abort(404, result_data)
+            return abort(400, result_data)
 
     def user_signin_service(self):
         user_data = self.middleware.read_get()
