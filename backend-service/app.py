@@ -12,6 +12,9 @@ app.config['ENV'] = conf.ENV
 app.config['SQLALCHEMY_DATABASE_URI'] = conf.DATABASE_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+# CORS
+cors = CORS(app)
+
 # SQLAlchemy init
 db = SQLAlchemy(app)
 
